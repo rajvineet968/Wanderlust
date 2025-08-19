@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top"><!--changed bg-body-tertiary to bg-body-light and class="navbar navbar-expand-lg" to class="navbar navbar-expand-md" and added border-bottom (bootstrap class to add bottom border) and also sticky-top(to stick at top so that it wont scroll with scrolling down)-->
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a><!--changed Navbar to <i class="fa-solid fa-compass"></i> and  href="#"" to href="/"-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" ><!--removed this aria-expanded="false" aria-label="Toggle navigation"-->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a><!--removed aria-current="page" and href="#"" to href="/" and class="nav-link active" to class="nav-link"-->
+                <a class="nav-link" href="/listings">All Listings</a><!--changed Features to All Listings and href="#" to href="/listings"-->
+                <a class="nav-link" href="/listings/new">Add new Listing</a><!--changed Pericing to Add new Listing and and href="#" to href="/listings/new-->
+                <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> --> <!--removed this -->
+            </div>
+        </div>
+    </div>
+</nav>
