@@ -22,6 +22,38 @@ routes and functionality defined in "review.js" can be used within the main Expr
 handle requests related to reviews. */
 const reviews=require("./routes/review.js");//requiring review routes
 
+
+//Home Route
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+
+//Session requiring
+const session=require('express-session');
+const sessionOptions={
+  secret:"mysupersecretcode",
+  resave:false,
+  saveUninitialized: true,
+  cookie:{
+    expires:Date.now()+1000*60*60*24*3,
+    maxAge:1000*60*60*24*3,
+    httpOnly:true,
+  },
+}
+app.use(session(sessionOptions));
+
+//requiring connect-flash
+const flash=require('connect-flash');
+app.use(flash());
+
+//after adding one list it shows a flash
+app.use((req,res,next)=>{
+  res.locals.success=req.flash("success");
+  res.locals.error=req.flash("error");
+  next();
+})
+
 const port = 8080;
 //Listening
 app.listen(port, () => {
@@ -71,11 +103,6 @@ application. This middleware is specifying that any requests that match the patt
 "/listings/:id/reviews" should be handled by the `reviews` router. */
 app.use('/listings/:id/reviews',reviews);
 
-//Home Route
-app.get("/", (req, res) => {
-  res.redirect("/listings");
-});
-
 
 // if by mistakely jumps into other page
 app.use((req,res,next)=>{
@@ -84,7 +111,6 @@ app.use((req,res,next)=>{
 //custom error handler middleware
 app.use((err,req,res,next)=>{
   let {status=500,message="Something went wrong!!"}=err;
-  console.log(err);
   res.status(status).render("listings/error.ejs",{err})
 })
 

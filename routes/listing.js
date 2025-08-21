@@ -30,6 +30,7 @@ router.get("/new", (req, res) => {
 router.post("/", validatelisting,wrapAsync(async (req, res,next) => {
     let list = req.body.listing;
     await Listing.insertOne(list);
+    req.flash("success","New Listing Created!!");
     res.redirect("/listings");
 }));
 
@@ -37,6 +38,10 @@ router.post("/", validatelisting,wrapAsync(async (req, res,next) => {
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params; //deconstructing of req.params
     const data1 = await Listing.findById(id).populate("reviews");
+    if(!data1){
+        req.flash("error","Your listing is not present");//any error is there it will show warning like the url you want to check is not present
+        return res.redirect("/listings");//return is must because it After res.redirect("/listings"), the code will still try to run res.render (which causes "Cannot set headers after they are sent" error sometimes).👉 Fix: add return before res.redirect:
+    }
     res.render("listings/show.ejs", { data1 });
 }));
 
@@ -44,6 +49,10 @@ router.get("/:id", wrapAsync(async (req, res) => {
 router.get("/:id/edit", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let data2 = await Listing.findById(id);
+    if(!data2){
+        req.flash("error","Your listing is not present");//any error is there it will show warning like the url you want to check is not present
+        return res.redirect("/listings");
+    }
     res.render("listings/edit.ejs", { data2 });
 }));
 router.put("/:id",validatelisting, wrapAsync(async (req, res) => {
@@ -60,6 +69,7 @@ router.put("/:id",validatelisting, wrapAsync(async (req, res) => {
 //     location: listings.location,
 //   });
     await Listing.findByIdAndUpdate(id,{...listings});//...listings
+    req.flash("success","Listing Updated!!");
     res.redirect(`/listings/${id}`);
 }));
 
@@ -67,6 +77,7 @@ router.put("/:id",validatelisting, wrapAsync(async (req, res) => {
 router.delete("/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
     let deletedata = await Listing.findByIdAndDelete(id);
+    req.flash("error","Listing Deleted!!");
     console.log(deletedata);
     res.redirect("/listings");
 }));

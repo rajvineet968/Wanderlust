@@ -29,7 +29,7 @@ listingschema=new Schema({//new keyword is necessary as we are creating new sche
         type:String,
         required:true,
     },
-    reviews:[
+    reviews:[//Added reviews for reviews scehema
         {
             type:Schema.Types.ObjectId,
             ref:"Review",
