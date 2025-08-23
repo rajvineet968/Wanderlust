@@ -40,7 +40,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
     const data1 = await Listing.findById(id).populate("reviews");
     if(!data1){
         req.flash("error","Your listing is not present");//any error is there it will show warning like the url you want to check is not present
-        return res.redirect("/listings");//return is must because it After res.redirect("/listings"), the code will still try to run res.render (which causes "Cannot set headers after they are sent" error sometimes).👉 Fix: add return before res.redirect:
+        return res.redirect("/listings");//return is must because it After res.redirect("/listings"), the code will still try to run res.render (which causes "Cannot set headers after they are sent" error sometimes).npm i👉 Fix: add return before res.redirect:
     }
     res.render("listings/show.ejs", { data1 });
 }));
