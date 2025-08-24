@@ -55,11 +55,11 @@ const sessionOptions={
   },
 }
 app.use(session(sessionOptions));
-
 //requiring connect-flash after app.use(session(sessionOptions));
 const flash=require('connect-flash');
 app.use(flash());
 
+//All below things are put in same chronolgical oder after session,flash are required
 //using passport after app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -67,11 +67,11 @@ passport.use(new LocalStrategy(User.authenticate()));// use static authenticate 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 //after adding one list it shows a flash
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success");
   res.locals.error=req.flash("error");
+  res.locals.currUser=req.user;
   next();
 })
 

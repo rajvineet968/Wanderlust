@@ -13,10 +13,14 @@ router.post('/signup',wrapAsync(async(req,res)=>{//using try and catch block to 
     try{
         let {username,email,password}=req.body;
         const newUser=new User({email,username});
-        const registeredUser=await User.register(newUser,password);
-        console.log(registeredUser);
-        req.flash("success","Welcome to Wanderlust!!");
-        res.redirect("/listings");
+        const registeredUser=await User.register(newUser,password);//register passport-local-mongoose inbuilt function to store in monogdb
+        req.login(registeredUser,(err)=>{
+            if(err){
+                return next(err);
+            }
+            req.flash("success","Welcome to Wanderlust!!");
+            res.redirect("/listings");
+        });
     }catch(err){
         req.flash("error",err.message);
         res.redirect("/signup");
@@ -31,5 +35,16 @@ router.post("/login",passport.authenticate("local",{failureRedirect:'/login',fai
     req.flash("success","Welcome Back to Wanderlust!!");
     res.redirect("/listings");
 }))
+
+//LOGOUT PAGE
+router.get("/logout",(req,res,next)=>{
+    req.logout((err)=>{
+        if(err){
+        return next(err);
+        }
+        req.flash("success","Succesfully Logged out!!");
+        res.redirect("/listings");
+    })
+})
 
 module.exports=router;
