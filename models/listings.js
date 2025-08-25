@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");//requiring mongoose
 const Schema=mongoose.Schema;//intitalized schema so it will be helpful as short form for writing more schemas
-const Review=require("./review.js");//required review.js 
+const Review=require("./review.js");//requiring review.js 
 
 listingschema=new Schema({//new keyword is necessary as we are creating new schema so system must know that we are creting new schemas
     title:{
@@ -34,7 +34,11 @@ listingschema=new Schema({//new keyword is necessary as we are creating new sche
             type:Schema.Types.ObjectId,
             ref:"Review",
         }
-    ]
+    ],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+    }
 })
 
 listingschema.post("findOneAndDelete",async(listing)=>{

@@ -67,7 +67,7 @@ passport.use(new LocalStrategy(User.authenticate()));// use static authenticate 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-//after adding one list it shows a flash
+//Using flash
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success");
   res.locals.error=req.flash("error");
@@ -124,7 +124,14 @@ application. This middleware is specifying that any requests that match the patt
 "/listings/:id/reviews" should be handled by the `reviews` router. */
 app.use('/listings/:id/reviews',reviewRouter);
 
+/* `app.use("/", userRouter);` is setting up a middleware in the Express application that specifies any
+requests starting with the root path "/" should be handled by the `userRouter`. This means that any
+routes defined in the `userRouter` will be accessible and processed when a request is made to the
+root path of the application. The `userRouter` likely contains routes and logic related to user
+functionalities such as authentication, registration, profile management, etc. */
 app.use("/",userRouter);
+
+
 // if by mistakely jumps into other page
 app.use((req,res,next)=>{
   next(new ExpressError(404,"Page not Found!!"));//we can send error to error middlewares
