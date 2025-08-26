@@ -4,7 +4,7 @@
         <div class="col-8 offset-2"><!--to align them in 8 column if u have 12 columns  and with left offset of 0.5rem-->
         <br><br>
         <h3>Create a New Listing</h3>
-        <form method="post" action="/listings" novalidate class="needs-validation">
+        <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="mb-3"><!--mb-3 is class of bootstrap to give a 3px margin-bottom-->
                 <label for="title" class="form-label">Title</label>
                 <input name="listing[title]" placeholder="Enter a catchy Title" type="text" class="form-control" required>
@@ -22,9 +22,13 @@
                     Please enter a short Desciption .
                 </div>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="image" class="form-label">Image Link</label>
                 <input name="listing[image]" placeholder="Enter Image URL/Link" type="text" class="form-control">
+            </div> -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Listing Image</label>
+                <input name="listing[image]"  type="file" class="form-control">
             </div>
             
             <!--keeping price ans country on same line for col-md-4 and col-md-8 respectively-->

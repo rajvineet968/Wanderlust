@@ -8,8 +8,7 @@ const ExpressError=require("./utils/ExpressError.js");//requiring expresseroor t
 used to check if a user is authenticated before allowing access to certain routes or
 functionalities. Here's a breakdown of what it does: */
 module.exports.isLoggedIn=(req,res,next)=>{
-    if(!req.isAuthenticated()){/*.isAuthenicated() is passport function to make sure if any update is 
-there to be done you must be logged in to do that update.*/
+    if(!req.isAuthenticated()){/*.isAuthenicated() is passport function to make sure if any update is there to be done you must be logged in to do that update.*/
         req.session.redirectUrl=req.originalUrl;
         req.flash("error","You must be logged in to create Listing!!");
         return res.redirect("/login");
