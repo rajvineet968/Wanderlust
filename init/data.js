@@ -10,6 +10,8 @@ const sampleListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    latitude: 34.0259,     // <-- Added manually
+    longitude: -118.7798,  // <-- Added manually
   },
   {
     title: "Modern Loft in Downtown",
@@ -22,6 +24,8 @@ const sampleListings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    latitude: 40.7128,
+    longitude: -74.006,
   },
   {
     title: "Mountain Retreat",
@@ -34,6 +38,8 @@ const sampleListings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    latitude: 39.1911,
+    longitude: -106.8175,
   },
   {
     title: "Historic Villa in Tuscany",
@@ -46,6 +52,8 @@ const sampleListings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    latitude: 43.7699,
+    longitude: 11.2556,
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -58,6 +66,8 @@ const sampleListings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    latitude: 45.5051,
+    longitude: -122.675,
   },
   {
     title: "Beachfront Paradise",
@@ -70,6 +80,8 @@ const sampleListings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    latitude: 21.1619,
+    longitude: 86.8515,
   },
   {
     title: "Rustic Cabin by the Lake",
@@ -82,6 +94,8 @@ const sampleListings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    latitude:39.096848,
+    longitude:-120.032349,
   },
   {
     title: "Luxury Penthouse with City Views",
@@ -94,6 +108,8 @@ const sampleListings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    latitude:34.052235,
+    longitude:-118.243683,
   },
   {
     title: "Ski-In/Ski-Out Chalet",
@@ -106,6 +122,8 @@ const sampleListings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    latitude: 46.096025,
+    longitude: 7.229023,
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -118,6 +136,8 @@ const sampleListings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    latitude:-2.333333,
+    longitude:34.833333,
   },
   {
     title: "Historic Canal House",
@@ -130,6 +150,8 @@ const sampleListings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    latitude:52.377956,
+    longitude:4.897070,
   },
   {
     title: "Private Island Retreat",
@@ -142,6 +164,8 @@ const sampleListings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    latitude:-16.5782,
+    longitude:179.4144,
   },
   {
     title: "Charming Cottage in the Cotswolds",
@@ -154,6 +178,8 @@ const sampleListings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    latitude:51.6833,
+    longitude:-2.1667,
   },
   {
     title: "Historic Brownstone in Boston",
@@ -166,6 +192,8 @@ const sampleListings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    latitude:42.361145,
+    longitude:-71.057083,
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -178,6 +206,8 @@ const sampleListings = [
     price: 1800,
     location: "Bali",
     country: "Indonesia",
+    latitude:-8.409518,
+    longitude:115.188919,
   },
   {
     title: "Mountain View Cabin in Banff",
@@ -190,6 +220,8 @@ const sampleListings = [
     price: 1500,
     location: "Banff",
     country: "Canada",
+    latitude:51.178364,
+    longitude:-115.570770,
   },
   {
     title: "Art Deco Apartment in Miami",
@@ -202,6 +234,8 @@ const sampleListings = [
     price: 1600,
     location: "Miami",
     country: "United States",
+    latitude:25.7617,
+    longitude:80.1918,
   },
   {
     title: "Tropical Villa in Phuket",
@@ -214,6 +248,8 @@ const sampleListings = [
     price: 3000,
     location: "Phuket",
     country: "Thailand",
+    latitude:7.878978,
+    longitude:98.398392,
   },
   {
     title: "Historic Castle in Scotland",
@@ -226,6 +262,8 @@ const sampleListings = [
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
+    latitude:57.1200,
+    longitude:-4.7100,
   },
   {
     title: "Desert Oasis in Dubai",
@@ -238,6 +276,8 @@ const sampleListings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
+    latitude:25.276987,
+    longitude:55.296249,
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -250,6 +290,8 @@ const sampleListings = [
     price: 1100,
     location: "Montana",
     country: "United States",
+    latitude:49.965260,
+    longitude:109.533691,
   },
   {
     title: "Beachfront Villa in Greece",
@@ -262,6 +304,8 @@ const sampleListings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
+    latitude:37.4453,
+    longitude:25.3287,
   },
   {
     title: "Eco-Friendly Treehouse Retreat",
@@ -274,6 +318,8 @@ const sampleListings = [
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
+    latitude:9.7489,
+    longitude:-83.7534,
   },
   {
     title: "Historic Cottage in Charleston",
@@ -286,6 +332,8 @@ const sampleListings = [
     price: 1600,
     location: "Charleston",
     country: "United States",
+    latitude:32.7766,
+    longitude:-79.9309,
   },
   {
     title: "Modern Apartment in Tokyo",
@@ -298,6 +346,8 @@ const sampleListings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
+    latitude:35.6895,
+    longitude:139.6917,
   },
   {
     title: "Lakefront Cabin in New Hampshire",
@@ -310,6 +360,8 @@ const sampleListings = [
     price: 1200,
     location: "New Hampshire",
     country: "United States",
+    latitude:43.1939,
+    longitude:71.5724,
   },
   {
     title: "Luxury Villa in the Maldives",
@@ -322,6 +374,8 @@ const sampleListings = [
     price: 6000,
     location: "Maldives",
     country: "Maldives",
+    latitude:3.2028,
+    longitude:73.2207,
   },
   {
     title: "Ski Chalet in Aspen",
@@ -334,6 +388,8 @@ const sampleListings = [
     price: 4000,
     location: "Aspen",
     country: "United States",
+    latitude:39.1911,
+    longitude:106.8175,
   },
   {
     title: "Secluded Beach House in Costa Rica",
@@ -346,6 +402,8 @@ const sampleListings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
+    latitude:9.7489,
+    longitude:-83.7534,
   },
 ];
 

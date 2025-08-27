@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV!="production"){
+if(process.env.NODE_ENV!="production"){//when we deploy our project it will in production ...now its in Develpoment
   require('dotenv').config()
 }
 
@@ -46,6 +46,7 @@ app.get("/", (req, res) => {
 });
 
 
+
 //Session requiring
 const session=require('express-session');
 const sessionOptions={
@@ -63,7 +64,10 @@ app.use(session(sessionOptions));
 const flash=require('connect-flash');
 app.use(flash());
 
+
+
 //All below things are put in same chronolgical oder after session,flash are required
+
 //using passport after app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -82,7 +86,7 @@ app.use((req,res,next)=>{
 const port = 8080;
 //Listening
 app.listen(port, () => {
-  console.log(`Listening to port ${port}`);
+  console.log(`Listening to port ${port} and it Live on http://localhost:8080/`);
 });
 
 const mongoose = require("mongoose");//for connecting mongoDb
@@ -136,7 +140,7 @@ functionalities such as authentication, registration, profile management, etc. *
 app.use("/",userRouter);
 
 
-// if by mistakely jumps into other page
+// if by mistakely client jumps into other page
 app.use((req,res,next)=>{
   next(new ExpressError(404,"Page not Found!!"));//we can send error to error middlewares
 })

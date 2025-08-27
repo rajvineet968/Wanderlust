@@ -1,12 +1,12 @@
 const express=require("express");
 const router=express.Router();
-const User=require("../models/user.js");
+// const User=require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
-const e = require("connect-flash");
+// const e = require("connect-flash");
 const passport=require("passport");
 const {saveRedirectUrl}=require("../middleware.js");
 
-const userController=require("../controllers/users.js");//MVC framework : Controllers
+const userController=require("../controllers/users.js");//MVC framework : Controllers  (userController is variable name: Dont think I had imported this file from controllers)
 
 //SIGNUP PAGE AND STORING USING User.register()(in line 11 of controllers->users.js)
 router.route("/signup")

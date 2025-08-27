@@ -4,11 +4,11 @@ const router=express.Router({mergeParams:true});
 const wrapAsync=require("../utils/wrapAsync.js");//wrapAysnc to throw error to error handling middlewares
 // const {review}=require("../schema.js");//requiring Joi for server side validation (not mongoose validations)
 // const ExpressError=require("../utils/ExpressError.js");//requiring expresseroor to print expected error and message
-const Listing = require("../models/listings.js");//requiring models and schema on which datas
-const Review=require("../models/review.js");//requiring  models and schema for reviews 
+// const Listing = require("../models/listings.js");//requiring models and schema on which datas
+// const Review=require("../models/review.js");//requiring  models and schema for reviews 
 const {validateReview, isLoggedIn, isReviewAuthor}=require("../middleware.js");
 
-const reviewController=require("../controllers/reviews.js");//MVC framework : Controllers
+const reviewController=require("../controllers/reviews.js");//MVC framework : Controllers (reviewController is variable name: Dont think I had imported this file from controllers)
 
 //REVIEWS ROUTE
 router.post(

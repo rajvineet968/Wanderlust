@@ -40,7 +40,13 @@ listingschema=new Schema({//new keyword is necessary as we are creating new sche
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User",
-    }
+    },
+    latitude: {
+        type: String,   // or Number (better for maps if you are handling distance,etc) 
+    },
+    longitude: {
+        type: String,   // or Number (better for maps if you are handling distance,etc)
+    },
 })
 
 listingschema.post("findOneAndDelete",async(listing)=>{

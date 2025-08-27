@@ -3,7 +3,7 @@
     <div class="row mt-3"><!-- Margin top is 0.75rem -->
         <div class="col-8 offset-2">
             <h3>Edit your Listing</h3>
-        <form method="POST" action="/listings/<%= data2._id %>?_method=PUT" novalidate class="needs-validation">
+        <form method="POST" action="/listings/<%= data2._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data"><!--enctype-->
         <div class="mb-3"><!--mb-3 is class of bootstrap to give a 3px margin-bottom-->
             <label for="title" class="form-label">Title</label>
             <input name="listing[title]" value="<%= data2.title %>" type="text" class="form-control" required/>
@@ -14,6 +14,7 @@
                 Please choose a Title.
             </div>
         </div>
+
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="listing[description]" class="form-control" required><%= data2.description %></textarea>
@@ -21,13 +22,18 @@
                 Please enter a short Desciption .
             </div>
         </div>
+
+        <!--Image preview-->
         <div class="mb-3">
-            <label for="image" class="form-label">Image Link</label>
-            <input name="listing[image]" value="<%= data2.image %>" class="form-control" type="text" required />
-            <div class="invalid-feedback">
-                Please enter a valid Image Link.
-            </div>
+            Original Listing Image<br><br>
+            <img src="<%=imageOriginalUrl%>">
         </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload New Image</label>
+            <input name="listing[image]"  class="form-control" type="file"  /><!--not compulsory to upload new image therfore removed required and invalid feedback-->
+        </div>
+
         <div class="row">
             <div class="mb-3 col-md-4">
                 <label for="price" class="form-label">Price</label>
@@ -36,6 +42,7 @@
                     Please choose a Price.
                 </div>
             </div>
+
             <div class="mb-3 col-md-8">
                 <label for="country" class="form-label">Country</label>
                 <input name="listing[country]" value="<%= data2.country %>" class="form-control" type="text" required/>
@@ -44,6 +51,7 @@
                 </div>
             </div>
         </div>
+
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
             <input name="listing[location]" value="<%= data2.location %>" class="form-control" type="text" required/>
@@ -51,6 +59,7 @@
                 Please choose a Location.
             </div>
         </div>
+        
         <button class="btn btn-dark edit-btn mt-3">Edit</button>
         <br><br>
         </form>

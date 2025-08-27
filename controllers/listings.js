@@ -8,8 +8,8 @@ module.exports.renderNewForm=(req, res) => {
     res.render("listings/new.ejs");
     };
 module.exports.createListing=async (req, res,next) => {
-    let url=req.file.path;
-    let filename=req.file.filename;
+    let url=req.file.path;/* asking for filename and url from req.file */
+    let {filename} = req.file;
     const list = new Listing(req.body.listing);
     /* `list.owner=req.user._id;` is assigning the `_id` of the currently logged in user to the
     `owner` field of the `list` object. This is typically done to associate the created listing
@@ -17,8 +17,22 @@ module.exports.createListing=async (req, res,next) => {
     establish a relationship between the listing and the user in the database. This can be
     useful for various purposes such as displaying listings created by a specific user,
     implementing authorization checks, and more. */
-    list.image={url,filename};//saving url and filename to image object in listings.js model
     list.owner=req.user._id;
+    list.image={url,filename};//saving url and filename to image object in listings.js model
+
+    // Geocode location using OpenStreetMap (Nominatim API)
+    const geoRes = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(list.location)}`
+    );
+    const geoData = await geoRes.json();
+    if (geoData.length > 0) {
+        list.latitude = geoData[0].lat;
+        list.longitude = geoData[0].lon;
+    } else {
+        req.flash("error", "Location not found, please enter a valid address.");
+        return res.redirect("/listings/new");
+    }
+    
     await list.save();
     req.flash("success","New Listing Created!!");
     res.redirect("/listings");
@@ -52,7 +66,9 @@ module.exports.renderEditForm=async (req, res) => {
         req.flash("error","Your listing is not present");//any error is there it will show warning like the url you want to check is not present
         return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { data2 });
+    let imageOriginalUrl=data2.image.url;
+    imageOriginalUrl=imageOriginalUrl.replace("/upload","/upload/w_250")//reducing pixels of image preview
+    res.render("listings/edit.ejs", { data2 ,imageOriginalUrl });
     }
 module.exports.updateListing=async (req, res) => {
     let { id } = req.params;
@@ -67,7 +83,17 @@ module.exports.updateListing=async (req, res) => {
 //         country: listings.country,
 //         location: listings.location,
 //       });
-    await Listing.findByIdAndUpdate(id,{...listings});//...listings
+    //what we did here is that first we update (if did any changes) all the datas excpet file .
+    let list=await Listing.findByIdAndUpdate(id,{...listings});//...listings
+    
+    if(typeof req.file!="undefined"){//if req.file exists then onyl update image
+        //then we will add image :{url,filename } to list which got updated just now
+        let url=req.file.path;/* asking for filename and url from req.file */
+        let {filename} = req.file;
+        list.image={url,filename};
+        await list.save();//again updating(saving) image 
+    }
+
     req.flash("success","Listing Updated!!");
     res.redirect(`/listings/${id}`);
     };
