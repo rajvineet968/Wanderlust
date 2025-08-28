@@ -57,10 +57,10 @@ application to handle requests related to users, such as user authentication, re
 management, etc. */
 const userRouter=require("./routes/user.js");
 
-// //Home Route
-// app.get("/", (req, res) => {
-//   res.redirect("/listings");
-// });
+//Home Route
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 //Session requiring
 const session=require('express-session');
