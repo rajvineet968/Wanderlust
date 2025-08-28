@@ -46,10 +46,10 @@ Check out the live application here: [Wanderlust Live](https://wanderlust-iir5.o
 ---
 
 ## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/wanderlust.git
-   ```
+1.Clone the repository:
+  ```bash
+  git clone https://github.com/yourusername/wanderlust.git
+  ```
 2.Navigate into the project folder:
   ```bash
   cd wanderlust
