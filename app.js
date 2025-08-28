@@ -10,6 +10,23 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");//acquiring user model
 
+const mongoose = require("mongoose");//for connecting mongoDb
+// const Listing = require("./models/listings.js");//requiring model and schema on which datas 
+// const Review=require("./models/review.js");//requiring  model and schema for reviews 
+// const MONGOURL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl=process.env.ATLASDB_URL //MONGO ATLAS
+//Connection to MongoDB
+main()
+  .then(() => {
+    console.log("Connection successfull to DB!!!");
+  })
+  .catch((err) => console.log(err));
+// async function main() {
+//   await mongoose.connect(MONGOURL);
+// }
+async function main() {
+  await mongoose.connect(dbUrl);
+}
 
 /* `app.set("view engine", "ejs");` is setting the view engine for the Express application to EJS
 (Embedded JavaScript). This means that when rendering views in your application, Express will use
@@ -40,17 +57,29 @@ application to handle requests related to users, such as user authentication, re
 management, etc. */
 const userRouter=require("./routes/user.js");
 
-//Home Route
-app.get("/", (req, res) => {
-  res.redirect("/listings");
-});
-
-
+// //Home Route
+// app.get("/", (req, res) => {
+//   res.redirect("/listings");
+// });
 
 //Session requiring
 const session=require('express-session');
+const MongoStore = require('connect-mongo');//For connect-mongo must be after requring session
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto: {
+      secret: process.env.SECRET
+    },
+    touchAfter:24*3600,
+});
+/* The code `store.on("error",()=>{ console.log("ERROR IN MONGO SESSION STORE!!") });` is setting up an
+event listener on the `store` object for any errors that may occur. */
+store.on("error",()=>{
+  console.log("ERROR IN MONGO SESSION STORE!!",err)
+});
 const sessionOptions={
-  secret:"mysupersecretcode",
+  store:store,//thats why we declared store before session
+  secret:process.env.SECRET,
   resave:false,
   saveUninitialized: true,
   cookie:{
@@ -82,26 +111,6 @@ app.use((req,res,next)=>{
   res.locals.currUser=req.user;
   next();
 })
-
-const port = 8080;
-//Listening
-app.listen(port, () => {
-  console.log(`Listening to port ${port} and it Live on http://localhost:8080/`);
-});
-
-const mongoose = require("mongoose");//for connecting mongoDb
-// const Listing = require("./models/listings.js");//requiring model and schema on which datas 
-// const Review=require("./models/review.js");//requiring  model and schema for reviews 
-const MONGOURL = "mongodb://127.0.0.1:27017/wanderlust";
-//Connection to MongoDB
-main()
-  .then(() => {
-    console.log("Connection successfull to DB!!!");
-  })
-  .catch((err) => console.log(err));
-async function main() {
-  await mongoose.connect(MONGOURL);
-}
 
 const path = require("path");//to connect path of backend to views,public folder for ejs and css,js files respectively
 app.set("views", path.join(__dirname, "views")); //ejs files
@@ -149,5 +158,12 @@ app.use((err,req,res,next)=>{
   let {status=500,message="Something went wrong!!"}=err;
   res.status(status).render("listings/error.ejs",{err})
 })
+
+
+const port = 8080;
+//Listening
+app.listen(port, () => {
+  console.log(`Listening to port ${port} and it Live on http://localhost:8080/listings`);
+});
 
 

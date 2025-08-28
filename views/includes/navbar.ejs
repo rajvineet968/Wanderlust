@@ -1,3 +1,25 @@
+<style>
+    .search-btn{
+        background-color:#fe424d ;
+        color:#fff;
+        border-radius: 25px;
+        padding: 0 1rem 0 1 rem;
+    }
+    .search-btn:hover{
+        background-color:#fe424d ;
+        color:#fff;
+    }
+    .search-btn i{
+        display:inline;
+        margin-right:0.5rem ;
+    }
+    .search-inp{
+        border-radius: 25px;
+        padding:0.5rem 3rem 0.5rem 3rem;
+        font-size: 1rem;
+    }
+</style>
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top"><!--changed bg-body-tertiary to bg-body-light and class="navbar navbar-expand-lg" to class="navbar navbar-expand-md" and added border-bottom (bootstrap class to add bottom border) and also sticky-top(to stick at top so that it wont scroll with scrolling down)-->
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a><!--changed Navbar to <i class="fa-solid fa-compass"></i> and  href="#"" to href="/"-->
@@ -7,20 +29,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a><!--removed aria-current="page" and href="#"" to href="/" and class="nav-link active" to class="nav-link"-->
-                <a class="nav-link" href="/listings">All Listings</a><!--changed Features to All Listings and href="#" to href="/listings"-->
-                <a class="nav-link" href="/listings/new">Add new Listing</a><!--changed Pericing to Add new Listing and and href="#" to href="/listings/new-->
+                <!--<a class="nav-link" href="/">Home</a>     comments: removed aria-current="page" and href="#"" to href="/" and class="nav-link active" to class="nav-link"-->
+                <a class="nav-link" href="/listings">Explore</a><!--changed Features to All Listings and href="#" to href="/listings"-->
+                <!-- shifted to line 25 -->
                 <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> --> <!--removed this -->
+            </div>
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations"/><!--adding "search-inp" in class-->
+                    <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button><!--removed "btn-outline-success" from clas to "btn-search"-->
+                </form>
             </div>
 
 
             <!--for showing icons of signup , login and logout-->
             <div class="navbar-nav ms-auto"><!--"ms-auto" to make this all right extreme-->
+                <a class="nav-link" href="/listings/new">Airbnb You Home</a><!--changed Pericing to Add new Listing and and href="#" to href="/listings/new-->
                 <%if(!currUser){%><!--to show login and signup when you first logged in -->
-                    <a class="nav-link" href="/signup">Sign Up</a>
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+                    <a class="nav-link" href="/login"><b>Login</b></a>
                 <%}%><%if(currUser){%>
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
                 <%}%>
             </div>
         </div>
