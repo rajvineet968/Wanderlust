@@ -11,7 +11,7 @@ const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");//acquiring user model
 
 const mongoose = require("mongoose");//for connecting mongoDb
-// const Listing = require("./models/listings.js");//requiring model and schema on which datas 
+const Listing = require("./models/listings.js");//requiring model and schema on which datas 
 // const Review=require("./models/review.js");//requiring  model and schema for reviews 
 // const MONGOURL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl=process.env.ATLASDB_URL //MONGO ATLAS
@@ -124,6 +124,7 @@ app.engine('ejs', ejsMate);// use ejs-locals for all ejs templates:
 
 // const wrapAsync=require("./utils/wrapAsync.js");//wrapAysnc to throw error to error handling middlewares
 const ExpressError=require("./utils/ExpressError.js");//requiring expresseroor to print expected error and message
+const wrapAsync = require('./utils/wrapAsync.js');
 
 // const {listing,review}=require("./schema.js");//requiring Joi for server side validation (not mongoose validations)
 
@@ -157,6 +158,20 @@ app.get("/privacy",(req,res)=>{
 app.get("/terms",(req,res)=>{
   res.render("./listings/terms.ejs")
 })
+
+//Search
+app.get(
+  "/search",
+  wrapAsync(async(req,res)=>{
+  let {search}=req.query;
+  let data=await Listing.find({$or:[{country:search},{title:search}]});
+  if(data.length>0){
+    res.render("listings/index.ejs", {data});
+  }else{
+    req.flash("error","Listing not done yet!!")
+    res.redirect("/listings");
+  }}
+));
 
 // if by mistakely client jumps into other page
 app.use((req,res,next)=>{
