@@ -148,6 +148,15 @@ root path of the application. The `userRouter` likely contains routes and logic 
 functionalities such as authentication, registration, profile management, etc. */
 app.use("/",userRouter);
 
+//Privacy
+app.get("/privacy",(req,res)=>{
+  res.render("./listings/privacy.ejs")
+})
+
+//Terms
+app.get("/terms",(req,res)=>{
+  res.render("./listings/terms.ejs")
+})
 
 // if by mistakely client jumps into other page
 app.use((req,res,next)=>{
