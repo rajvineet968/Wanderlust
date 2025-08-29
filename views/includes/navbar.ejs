@@ -35,8 +35,8 @@
                 <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> --> <!--removed this -->
             </div>
             <div class="navbar-nav ms-auto">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations"/><!--adding "search-inp" in class-->
+                <form class="d-flex" role="search" method="GET" action="/search">
+                    <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" name="search"/><!--adding "search-inp" in class-->
                     <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button><!--removed "btn-outline-success" from clas to "btn-search"-->
                 </form>
             </div>
