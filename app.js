@@ -74,7 +74,7 @@ const store=MongoStore.create({
 });
 /* The code `store.on("error",()=>{ console.log("ERROR IN MONGO SESSION STORE!!") });` is setting up an
 event listener on the `store` object for any errors that may occur. */
-store.on("error",()=>{
+store.on("error",(err)=>{
   console.log("ERROR IN MONGO SESSION STORE!!",err)
 });
 const sessionOptions={
